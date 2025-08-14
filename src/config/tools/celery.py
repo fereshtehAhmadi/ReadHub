@@ -1,0 +1,16 @@
+from config.tools.env import env
+
+CELERY_TIMEZONE: str = "UTC"
+CELERY_BROKER_URL: str = env("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = "django-db"
+CELERY_RESULT_EXTENDED: bool = True
+CELERY_RESULT_BACKEND_ALWAYS_RETRY: bool = True
+CELERY_RESULT_BACKEND_MAX_RETRIES: int = 10
+CELERY_ACCEPT_CONTENT: list[str] = ["json"]
+CELERY_TASK_SERIALIZER: str = "json"
+CELERY_RESULT_SERIALIZER: str = "json"
+CELERY_TASK_TIME_LIMIT: int = 10 * 60
+CELERY_TASK_SOFT_TIME_LIMIT: int = 5 * 60
+CELERY_BEAT_SCHEDULER: str = "django_celery_beat.schedulers:DatabaseScheduler"
+CELERY_WORKER_SEND_TASK_EVENTS: bool = True
+CELERY_TASK_SEND_SENT_EVENT: bool = True
