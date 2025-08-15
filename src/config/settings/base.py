@@ -1,4 +1,5 @@
 import os
+from .base import *  # noqa: F403, F401
 
 from config.tools.env import APPS_DIR, BASE_DIR, PROJECT_DIR
 
@@ -11,7 +12,10 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 THIRD_PARTY_APPS = []
-LOCAL_APPS = []
+LOCAL_APPS = [
+    # "apps.app_1",
+
+]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -19,16 +23,16 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    "django.middleware.locale.LocaleMiddleware",
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "corsheaders.middleware.CorsMiddleware",
-    "django_structlog.middlewares.RequestMiddleware",
 ]
 
 ROOT_URLCONF = 'config.urls'
-# TEMPLATES
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -50,8 +54,6 @@ TEMPLATES = [
 ]
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -68,8 +70,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -84,8 +84,7 @@ LANGUAGES = (
     ("fa", "Persian"),
 )
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
+
 STATIC_ROOT = str(BASE_DIR / "static")
 
 STATIC_URL = 'static/'
@@ -94,8 +93,7 @@ LOCALE_PATHS = [str(PROJECT_DIR / "locale")]
 
 MEDIA_URL = "/media/"
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
