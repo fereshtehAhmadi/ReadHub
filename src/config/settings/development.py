@@ -1,7 +1,6 @@
 from string import ascii_letters
 
 from .base import *  # noqa: F403, F401
-from .base import INSTALLED_APPS, MIDDLEWARE, env
 
 DEBUG = True
 
