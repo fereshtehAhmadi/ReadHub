@@ -1,10 +1,6 @@
-import logging
 import os
 
-import structlog
 from celery import Celery
-
-from celery.signals import setup_logging
 from django_structlog.celery.steps import DjangoStructLogInitStep
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")

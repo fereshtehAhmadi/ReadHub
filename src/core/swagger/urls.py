@@ -2,7 +2,7 @@ from django.urls import path
 from django.urls.resolvers import URLPattern, URLResolver
 from drf_spectacular.views import SpectacularRedocView, SpectacularSwaggerView
 
-from core.swagger.views import (ApiSchemaView)
+from core.swagger.views import ApiSchemaView
 
 swagger_urlpatterns: list[URLPattern | URLResolver] = [
     # api services

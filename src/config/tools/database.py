@@ -1,7 +1,7 @@
 from config.tools.env import env
 
 DATABASES = {
-    'default': {
+    "default": {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
             "NAME": env("POSTGRES_DB"),
@@ -12,7 +12,6 @@ DATABASES = {
         }
     }
 }
-
 
 
 DEFAULT_AUTO_FIELD: str = "django.db.models.BigAutoField"
