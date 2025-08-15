@@ -10,7 +10,7 @@ BASE_DIR: Path = Path(__file__).resolve(strict=True).parent.parent.parent.parent
 PROJECT_DIR: Path = BASE_DIR / "src"
 APPS_DIR: Path = BASE_DIR / "apps"
 
-READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
+READ_DOT_ENV_FILE = env.bool("DJANGO_ALLOWED_HOSTS", default=True)
 if READ_DOT_ENV_FILE:
     env.read_env(str(BASE_DIR / ".env"))
 
