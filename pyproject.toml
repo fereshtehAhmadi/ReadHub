@@ -1,0 +1,14 @@
+# ==== project ====
+[project]
+name = "ReadHub"
+version = "0.0.0"
+requires-python = "==3.12.7"
+
+authors = [
+  { name = "Fereshteh Ahmadi", email = "" },
+  { name = "Zahra Najafiyan", email = "zahra.najafiyanfar@gmail.com" },
+
+]
+description = "Your gateway to a network of libraries. One account, endless books. ReadHub makes borrowing books simple and seamless."
+readme = "README.md"
+license = { file = "LICENSE" }
