@@ -2,7 +2,7 @@ services:
   django:
     build:
       context: .
-      dockerfile: ./docker/django/Dockerfile
+      dockerfile: ./compose/django/Dockerfile
       args:
         BUILD_ENVIRONMENT: local
     container_name: read_hub_django
@@ -59,7 +59,7 @@ services:
   celeryworker:
     build:
       context: .
-      dockerfile: ./docker/django/Dockerfile
+      dockerfile: ./compose/django/Dockerfile
       args:
         BUILD_ENVIRONMENT: local
     container_name: read_hub_celeryworker
@@ -75,7 +75,7 @@ services:
   celerybeat:
     build:
       context: .
-      dockerfile: ./docker/django/Dockerfile
+      dockerfile: ./compose/django/Dockerfile
       args:
         BUILD_ENVIRONMENT: local
     container_name: read_hub_celerybeat
