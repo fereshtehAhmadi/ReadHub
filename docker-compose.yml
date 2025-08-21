@@ -19,8 +19,8 @@ volumes:
 services:
   django: &django
     build:
-      context: .
-      dockerfile: ./compose/stage/django/Dockerfile
+      context: .f
+      dockerfile: ./compose/production/django/Dockerfile
     container_name: read_hub_django
     image: ${DC_IMAGE_NAME:-read_hub_image}:${DC_IMAGE_TAG:-stage}
     volumes:
