@@ -1,8 +1,8 @@
 volumes:
   media_data:
-  read_hub_postgres_data: {}
-  read_hub_postgres_data_backups: {}
-  read_hub_redis_data: {}
+  read_hub_postgres_data: { }
+  read_hub_postgres_data_backups: { }
+  read_hub_redis_data: { }
   read_hub_backend_gunicorn_data:
     driver: local
     driver_opts:
@@ -80,7 +80,7 @@ services:
       - redis
       - postgres
       - rabbitmq
-    ports: []
+    ports: [ ]
     command: /start-celeryworker
     restart: always
 
@@ -91,7 +91,7 @@ services:
       - redis
       - postgres
       - rabbitmq
-    ports: []
+    ports: [ ]
     command: /start-celerybeat
     restart: always
 

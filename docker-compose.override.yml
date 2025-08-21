@@ -7,7 +7,7 @@ services:
   django:
     build:
       context: .
-      dockerfile: ./compose/local/django/Dockerfile
+      dockerfile: ./compose/django/Dockerfile
     container_name: read_hub_django
     image: read_hub_image:local
     volumes:
