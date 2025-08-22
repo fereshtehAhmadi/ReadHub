@@ -7,6 +7,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     build-essential \
     git \
     libpq-dev \
+    postgresql-client \
+    gettext \
  && rm -rf /var/lib/apt/lists/*
 
 COPY ./compose/production/django/entrypoint /entrypoint

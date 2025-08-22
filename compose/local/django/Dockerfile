@@ -7,6 +7,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     build-essential \
     git \
     libpq-dev \
+    postgresql-client \
+    gettext \
  && rm -rf /var/lib/apt/lists/*
 
 COPY ./compose/local/django/entrypoint /entrypoint
@@ -34,7 +36,7 @@ RUN mkdir -p ${APP_HOME}/logs
 RUN mkdir -p ${APP_HOME}/src/static
 
 ARG APP_HOME=/app
-WORKDIR ${APP_HOME}
+WORKDIR ${APP_HOME}/src
 
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1

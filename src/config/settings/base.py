@@ -83,9 +83,9 @@ LANGUAGES = (
 )
 
 
-STATIC_ROOT = str(BASE_DIR / "static")
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-STATIC_URL = "static/"
 MEDIA_ROOT = os.path.join(PROJECT_DIR, "media")
 LOCALE_PATHS = [str(PROJECT_DIR / "locale")]
 

@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   django:
     build:
@@ -8,6 +10,7 @@ services:
     container_name: read_hub_django
     env_file:
       - ./.env
+    working_dir: /app/src
     volumes:
       - ./src:/app/src:rw
       - ./logs:/app/logs:rw
@@ -21,15 +24,11 @@ services:
       - rabbitmq
     command: /start
     restart: always
-    healthcheck:
-      test: ["CMD", "test", "-S", "/var/run/gunicorn/read_hub.sock"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 30s
+    networks:
+      - readhub-network
 
   postgres:
-    image: postgres:13
+    image: postgres:15
     container_name: read_hub_postgres
     env_file:
       - ./.env
@@ -38,6 +37,8 @@ services:
     ports:
       - "5432:5432"
     restart: always
+    networks:
+      - readhub-network
 
   redis:
     image: redis:6
@@ -47,6 +48,8 @@ services:
     ports:
       - "6379:6379"
     restart: always
+    networks:
+      - readhub-network
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -55,6 +58,8 @@ services:
       - "15672:15672"
       - "5672:5672"
     restart: always
+    networks:
+      - readhub-network
 
   celeryworker:
     build:
@@ -71,6 +76,8 @@ services:
       - rabbitmq
     command: /start-celeryworker
     restart: always
+    networks:
+      - readhub-network
 
   celerybeat:
     build:
@@ -87,8 +94,14 @@ services:
       - rabbitmq
     command: /start-celerybeat
     restart: always
+    networks:
+      - readhub-network
 
 volumes:
   media_data:
   postgres_data:
   redis_data:
+
+networks:
+  readhub-network:
+    driver: bridge

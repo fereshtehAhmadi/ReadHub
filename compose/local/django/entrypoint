@@ -1,10 +1,16 @@
 #!/bin/sh
 set -e
 
+until PGPASSWORD=$POSTGRES_PASSWORD psql -h "$POSTGRES_HOST" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c '\q'; do
+  echo "Waiting for Postgres..."
+  sleep 1
+done
+
 echo "Applying database migrations..."
-python src/manage.py migrate --noinput
+python manage.py migrate --settings=config.settings.local --noinput
+
 
 echo "Collecting static files..."
-python src/manage.py collectstatic --noinput
+python manage.py collectstatic --settings=config.settings.local --noinput
 
 exec "$@"
