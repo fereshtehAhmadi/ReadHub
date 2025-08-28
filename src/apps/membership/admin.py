@@ -11,16 +11,16 @@ class MembershipPlanAdmin(admin.ModelAdmin):
 
 @admin.register(UserDiscount)
 class UserDiscountAdmin(admin.ModelAdmin):
-    list_display = ["id", "name", "start_date", "end_date", "promo_code", "user__full_name"]
+    list_display = ["id", "name", "start_date", "end_date", "promo_code", "user__first_name", "user__last_name"]
     raw_id_fields = ["user"]
-    search_fields = ["id", "name", "user__full_name"]
+    search_fields = ["id", "name", "user__first_name", "user__last_name"]
 
 
 @admin.register(Preorder)
 class PreorderAdmin(admin.ModelAdmin):
     list_display = ["id", "user", "membership_plan", "user_discount"]
     raw_id_fields = ["user", "membership_plan", "user_discount"]
-    search_fields = ["id", "membership_plan__name", "membership_plan__id", "user__full_name"]
+    search_fields = ["id", "membership_plan__name", "membership_plan__id", "user__first_name", "user__last_name"]
 
 
 @admin.register(PurchasedMembership)
