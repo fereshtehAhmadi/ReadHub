@@ -1,0 +1,160 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-28 12:15+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: apps/book/apps.py:7
+msgid "Book"
+msgstr "کتاب"
+
+#: apps/book/models.py:12
+msgid "category"
+msgstr ""
+
+#: apps/book/models.py:13
+msgid "categories"
+msgstr ""
+
+#: apps/book/models.py:20
+msgid "book_contributor"
+msgstr ""
+
+#: apps/book/models.py:21
+msgid "book_contributors"
+msgstr ""
+
+#: apps/book/models.py:32
+msgid "book"
+msgstr ""
+
+#: apps/book/models.py:33
+msgid "books"
+msgstr ""
+
+#: apps/library/apps.py:7
+msgid "Library"
+msgstr ""
+
+#: apps/library/models.py:15
+msgid "library"
+msgstr ""
+
+#: apps/library/models.py:16
+msgid "libraries"
+msgstr ""
+
+#: apps/library/models.py:26 apps/library/models.py:27
+msgid "library books"
+msgstr ""
+
+#: apps/membership/apps.py:7
+msgid "Membership"
+msgstr ""
+
+#: apps/membership/models.py:14
+msgid "membership plan"
+msgstr ""
+
+#: apps/membership/models.py:15
+msgid "membership plans"
+msgstr ""
+
+#: apps/membership/models.py:26
+msgid "user discount"
+msgstr ""
+
+#: apps/membership/models.py:27
+msgid "user discounts"
+msgstr ""
+
+#: apps/membership/models.py:36
+msgid "preorder"
+msgstr ""
+
+#: apps/membership/models.py:37
+msgid "preorders"
+msgstr ""
+
+#: apps/membership/models.py:47
+msgid "purchased membership"
+msgstr ""
+
+#: apps/membership/models.py:48
+msgid "purchased memberships"
+msgstr ""
+
+#: apps/provider/apps.py:7
+msgid "Provider"
+msgstr ""
+
+#: apps/user/apps.py:7
+msgid "User"
+msgstr ""
+
+#: apps/user/models.py:11
+msgid "email address"
+msgstr ""
+
+#: apps/user/models.py:12
+msgid "mobile"
+msgstr ""
+
+#: apps/user/models.py:13
+msgid "first name"
+msgstr ""
+
+#: apps/user/models.py:14
+msgid "last name"
+msgstr ""
+
+#: apps/user/models.py:16
+msgid "username"
+msgstr ""
+
+#: apps/user/models.py:19
+msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr ""
+
+#: apps/user/models.py:22
+msgid "A user with that username already exists."
+msgstr ""
+
+#: apps/user/models.py:42 apps/user/models.py:43
+msgid "library staff"
+msgstr ""
+
+#: core/models/base.py:8
+msgid "is_active"
+msgstr ""
+
+#: core/models/base.py:9
+msgid "created_at"
+msgstr ""
+
+#: core/models/base.py:10
+msgid "modified_at"
+msgstr ""
+
+#: core/validations/validation.py:7
+msgid "mobile number is not valid."
+msgstr ""
+
+#: core/validations/validation.py:13
+msgid ""
+"Username must start with a letter and can only contain letters, numbers, and "
+"underscores."
+msgstr ""
