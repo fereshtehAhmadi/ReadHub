@@ -1,0 +1,105 @@
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+      args:
+        BUILD_ENVIRONMENT: local
+    container_name: read_hub_django
+    env_file:
+      - ./.env
+    working_dir: /app/src
+    volumes:
+      - ./src:/app/src:rw
+      - ./logs:/app/logs:rw
+      - ./staticfiles:/app/src/staticfiles:rw
+      - media_data:/app/src/media:rw
+    ports:
+      - "8585:8000"
+    depends_on:
+      - postgres
+      - redis
+      - rabbitmq
+    command: /start
+    restart: always
+    networks:
+      - readhub-network
+
+  postgres:
+    image: postgres:15
+    container_name: read_hub_postgres
+    env_file:
+      - ./.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - readhub-network
+
+  redis:
+    image: redis:6
+    container_name: read_hub_redis
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    restart: always
+    networks:
+      - readhub-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: read_hub_rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    restart: always
+    networks:
+      - readhub-network
+
+  celeryworker:
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+      args:
+        BUILD_ENVIRONMENT: local
+    container_name: read_hub_celeryworker
+    env_file:
+      - ./.env
+    depends_on:
+      - django
+      - redis
+      - rabbitmq
+    command: /start-celeryworker
+    restart: always
+    networks:
+      - readhub-network
+
+  celerybeat:
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+      args:
+        BUILD_ENVIRONMENT: local
+    container_name: read_hub_celerybeat
+    env_file:
+      - ./.env
+    depends_on:
+      - django
+      - redis
+      - rabbitmq
+    command: /start-celerybeat
+    restart: always
+    networks:
+      - readhub-network
+
+volumes:
+  media_data:
+  postgres_data:
+  redis_data:
+
+networks:
+  readhub-network:
+    driver: bridge
