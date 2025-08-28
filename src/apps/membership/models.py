@@ -30,7 +30,7 @@ class UserDiscount(BaseModel):
 class Preorder(BaseModel):
     user = models.ForeignKey("user.User", on_delete=models.PROTECT)
     membership_plan = models.ForeignKey("MembershipPlan", on_delete=models.PROTECT)
-    user_discount = models.ForeignKey("UserDiscount", on_delete=models.PROTECT,null=True, blank=True)
+    user_discount = models.ForeignKey("UserDiscount", on_delete=models.PROTECT, null=True, blank=True)
 
     class Meta:
         verbose_name = _("preorder")
