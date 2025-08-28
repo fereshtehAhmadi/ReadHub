@@ -105,6 +105,8 @@ CSRF_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = "DENY"
 DJANGO_STRUCTLOG_COMMAND_LOGGING_ENABLED = True
 
+AUTH_USER_MODEL = "user.User"
+
 SPECTACULAR_SETTINGS = {
     "TITLE": "Read Hub",
     "DESCRIPTION": "Your gateway to a network of libraries. One account, endless books."
