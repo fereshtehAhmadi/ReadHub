@@ -1,0 +1,100 @@
+volumes:
+  media_data:
+  read_hub_postgres_data: { }
+  read_hub_postgres_data_backups: { }
+  read_hub_redis_data: { }
+  read_hub_backend_gunicorn_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /var/run/gunicorn
+  read_hub_backend_django_log:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./logs
+
+services:
+  django: &django
+    build:
+      context: .f
+      dockerfile: ./compose/production/django/Dockerfile
+    container_name: read_hub_django
+    image: ${DC_IMAGE_NAME:-read_hub_image}:${DC_IMAGE_TAG:-stage}
+    volumes:
+      - read_hub_backend_gunicorn_data:/var/run/gunicorn:rw
+      - read_hub_backend_django_log:/app/logs
+      - ./staticfiles/:/app/src/staticfiles:rw
+      - media_data:/read-hub/src/media:rw
+    depends_on:
+      - redis
+    env_file:
+      - ./.env
+    command: /start
+    networks:
+      - read-hub-project-network
+    restart: always
+    healthcheck:
+      test: [ "CMD", "test", "-S", "/var/run/gunicorn/read_hub_api_stage.sock" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/stage/postgres/Dockerfile
+    container_name: read_hub_postgres
+    volumes:
+      - read_hub_postgres_data:/var/lib/postgresql/data
+      - read_hub_postgres_data_backups:/backups
+    env_file:
+      - ./.env
+    networks:
+      - read-hub-project-network
+    restart: always
+
+  redis:
+    image: docker.io/redis:6
+    container_name: read_hub_redis
+    volumes:
+      - read_hub_redis_data:/data
+    networks:
+      - read-hub-project-network
+    restart: always
+
+  rabbitmq:
+    image: docker.io/rabbitmq:3-management
+    container_name: read_hub_rabbitmq
+    networks:
+      - read-hub-project-network
+    restart: always
+
+  celeryworker:
+    <<: *django
+    container_name: read_hub_celeryworker
+    depends_on:
+      - redis
+      - postgres
+      - rabbitmq
+    ports: [ ]
+    command: /start-celeryworker
+    restart: always
+
+  celerybeat:
+    <<: *django
+    container_name: read_hub_celerybeat
+    depends_on:
+      - redis
+      - postgres
+      - rabbitmq
+    ports: [ ]
+    command: /start-celerybeat
+    restart: always
+
+networks:
+  read-hub-project-network:
+    driver: bridge

@@ -83,9 +83,9 @@ LANGUAGES = (
 )
 
 
-STATIC_ROOT = str(BASE_DIR / "static")
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-STATIC_URL = "static/"
 MEDIA_ROOT = os.path.join(PROJECT_DIR, "media")
 LOCALE_PATHS = [str(PROJECT_DIR / "locale")]
 
@@ -114,3 +114,10 @@ SPECTACULAR_SETTINGS = {
 }
 from config.tools.celery import *  # noqa: F403, E402, F401
 from config.tools.database import *  # noqa: F403, E402, F401
+
+from config.tools.env import env
+
+SECRET_KEY = env("DJANGO_SECRET_KEY")
+ALLOWED_HOSTS: list[str] = env.list("DJANGO_ALLOWED_HOSTS")
+CORS_ALLOWED_ORIGINS: list[str] = env.list("DJANGO_CORS_ALLOWED_ORIGINS")
+CORS_ALLOW_HEADERS: list[str] = ["*"]
