@@ -16,6 +16,7 @@ RUN sed -i 's/\r$//g' /entrypoint
 RUN chmod +x /entrypoint
 
 COPY ./requirements /requirements/
+RUN pip install --no-cache-dir -r /requirements/${BUILD_ENVIRONMENT}.txt
 
 COPY ./compose/local/django/start /start
 RUN chmod +x /start
@@ -27,8 +28,6 @@ RUN chmod +x /start-celeryworker
 COPY ./compose/local/django/celery/beat/start /start-celerybeat
 RUN sed -i 's/\r$//g' /start-celerybeat
 RUN chmod +x /start-celerybeat
-
-RUN pip install --no-cache-dir -r /requirements/${BUILD_ENVIRONMENT}.txt
 
 FROM python-base AS python-run-stage
 
