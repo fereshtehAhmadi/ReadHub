@@ -12,7 +12,11 @@ DJANGO_APPS = [
 ]
 THIRD_PARTY_APPS = []
 LOCAL_APPS = [
-    # "apps.app_1",
+    "apps.book",
+    "apps.library",
+    "apps.membership",
+    "apps.user",
+    "apps.provider",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -52,7 +56,6 @@ TEMPLATES = [
 ]
 WSGI_APPLICATION = "config.wsgi.application"
 
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -68,7 +71,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
@@ -82,15 +84,13 @@ LANGUAGES = (
     ("fa", "Persian"),
 )
 
-
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 MEDIA_ROOT = os.path.join(PROJECT_DIR, "media")
 LOCALE_PATHS = [str(PROJECT_DIR / "locale")]
 
 MEDIA_URL = "/media/"
-
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
@@ -105,6 +105,8 @@ CSRF_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = "DENY"
 DJANGO_STRUCTLOG_COMMAND_LOGGING_ENABLED = True
 
+AUTH_USER_MODEL = "user.User"
+
 SPECTACULAR_SETTINGS = {
     "TITLE": "Read Hub",
     "DESCRIPTION": "Your gateway to a network of libraries. One account, endless books."
@@ -114,8 +116,7 @@ SPECTACULAR_SETTINGS = {
 }
 from config.tools.celery import *  # noqa: F403, E402, F401
 from config.tools.database import *  # noqa: F403, E402, F401
-
-from config.tools.env import env
+from config.tools.env import env  # noqa: F403, E402, F401
 
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 ALLOWED_HOSTS: list[str] = env.list("DJANGO_ALLOWED_HOSTS")
