@@ -24,8 +24,8 @@ class BookContributor(BaseModel):
 class Book(BaseModel):
     name = models.CharField(max_length=200)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    auther = models.ManyToManyField(BookContributor)
-    translator = models.ManyToManyField(BookContributor)
+    auther = models.ManyToManyField(BookContributor, related_name="author_books")
+    translator = models.ManyToManyField(BookContributor, related_name="translator_books")
     publisher = models.CharField(max_length=200)
 
     class Meta:

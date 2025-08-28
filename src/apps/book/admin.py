@@ -17,6 +17,6 @@ class BookContributorAdmin(admin.ModelAdmin):
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ["id", "name", "category__name", "book_contributor__full_name", "publisher"]
-    raw_id_fields = ['category', "book_contributor"]
-    search_fields = ["id", "name", "category__name", "book_contributor__full_name", "publisher"]
+    list_display = ["id", "name", "category__name", "publisher"]
+    raw_id_fields = ["category"]
+    search_fields = ["id", "name", "category__name", "publisher"]
