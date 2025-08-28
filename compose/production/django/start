@@ -5,7 +5,6 @@ set -o pipefail
 set -o nounset
 
 python src/manage.py migrate
-python src/manage.py compilemessages
 python src/manage.py collectstatic --noinput
 
 export PYTHONPATH="./src"
