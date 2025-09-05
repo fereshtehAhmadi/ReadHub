@@ -3,8 +3,8 @@ from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from core.models.base import BaseModel
-from core.validations.validation import MobileNumberValidators, UsernameValidators
+from src.core.models.base import BaseModel
+from src.core.validations.validation import MobileNumberValidators, UsernameValidators
 
 
 class User(AbstractUser):
