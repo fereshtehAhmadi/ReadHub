@@ -1,4 +1,4 @@
-FROM python:3.13-slim AS python-base
+FROM python:3.13-slim-bullseye AS python-base
 
 ARG BUILD_ENVIRONMENT=production
 ENV BUILD_ENVIRONMENT=${BUILD_ENVIRONMENT}
